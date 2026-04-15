@@ -1,0 +1,108 @@
+{
+  "name": "pairvoice",
+  "displayName": "PairVoice — Voice Pair Programmer",
+  "description": "Voice-native AI pair programmer. Speak to understand, fix, and ship code.",
+  "version": "0.1.0",
+  "publisher": "pairvoice",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "enabledApiProposals": [
+    "terminalDataWriteEvent"
+  ],
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pairvoice.startVoice",
+        "title": "PairVoice: Start Listening",
+        "icon": "$(mic)"
+      },
+      {
+        "command": "pairvoice.stopVoice",
+        "title": "PairVoice: Stop",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "pairvoice.indexWorkspace",
+        "title": "PairVoice: Index This Workspace"
+      },
+      {
+        "command": "pairvoice.openPanel",
+        "title": "PairVoice: Open Panel"
+      },
+      {
+        "command": "pairvoice.attachDocument",
+        "title": "PairVoice: Attach Document to Knowledge Base"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "pairvoice.startVoice",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pairvoice",
+          "title": "PairVoice",
+          "icon": "$(mic)"
+        }
+      ]
+    },
+    "views": {
+      "pairvoice": [
+        {
+          "type": "webview",
+          "id": "pairvoice.panel",
+          "name": "PairVoice"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "PairVoice",
+      "properties": {
+        "pairvoice.backendUrl": {
+          "type": "string",
+          "default": "http://localhost:8000",
+          "description": "URL of the PairVoice backend server"
+        },
+        "pairvoice.vapiPublicKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Vapi public key (from vapi.ai dashboard)"
+        },
+        "pairvoice.vapiAssistantId": {
+          "type": "string",
+          "default": "",
+          "description": "Your Vapi assistant ID"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build:webview": "node ./scripts/build-webview.js",
+    "compile": "npm run -s build:webview && tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.25.12",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@vapi-ai/web": "^2.5.2"
+  }
+}
