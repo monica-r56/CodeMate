@@ -34,13 +34,11 @@
 
 ```bash
 cd backend
-cp .env.example .env
-# Fill in all values in .env
-
+cp .env
 pip install -r requirements.txt
 
 # Start the server
-python main.py
+python3 -m uvicorn main:app --port 8000
 # → Running at http://localhost:8000
 ```
 
@@ -80,20 +78,19 @@ ngrok http 8000
 
 5. Copy your **Assistant ID**
 
-### Step 5 — Install the VS Code extension
+### Step 5 — Install and launch the VS Code extension
 
 ```bash
 cd extension
 npm install
 npm run compile
-
-# Install locally in VS Code:
-# Press F5 in VS Code to launch Extension Development Host
-# OR package it:
-npx vsce package
-# → generates pairvoice-0.1.0.vsix
-# Install: code --install-extension pairvoice-0.1.0.vsix
 ```
+
+Then in VS Code:
+1. Open the `extension` folder.
+2. Open the Run & Debug panel.
+3. Start debugging with `Launch Extension`.
+4. This opens a new Extension Development Host window.
 
 ### Step 6 — Configure the extension
 
@@ -166,18 +163,3 @@ FastAPI Backend (Python)
   ├── Redis (session memory)
   └── Executor (patch, test, git)
 ```
-
----
-
-## Hackathon demo script
-
-1. Open the sample repo in VS Code — panel opens automatically
-2. Index the workspace (pre-run this before the demo)
-3. Open a file with a deliberate bug
-4. Press `Ctrl+Shift+V` — speak: *"I'm getting a null reference error in the webhook handler, what's causing it?"*
-5. Agent explains the bug
-6. Agent offers: *"Want me to fix this?"* — say *"Yes"*
-7. Diff appears in the panel — agent applies the patch
-8. Say *"Run the tests"* — agent runs pytest, speaks results
-9. Say *"Commit this and open a PR, assign to Alice"* — PR opens on GitHub
-10. 🎤 Done. Judges applaud.
