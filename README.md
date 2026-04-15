@@ -42,7 +42,7 @@ python3 -m uvicorn main:app --port 8000
 # → Running at http://localhost:8000
 ```
 
-### Step 3 — Expose backend to Vapi (for webhooks)
+### Step 3 — Expose backend to Vapi (for webhooks) - optional
 
 ```bash
 # Install ngrok: https://ngrok.com/download
@@ -52,31 +52,8 @@ ngrok http 8000
 
 ### Step 4 — Create your Vapi Assistant
 
-1. Go to vapi.ai → Assistants → Create
-2. Set **System Prompt**:
-   ```
-   You are a senior software engineer pair programmer called PairVoice.
-   You help developers understand their codebase, fix bugs, check PRs,
-   and run tests — all by voice. Be concise (2-4 sentences). Speak naturally.
-   After answering, always offer to take action if one is available.
-   ```
-3. Set **Server URL**: `https://YOUR-NGROK-URL.ngrok.io/vapi/webhook`
-4. Add these **Tools** (type: Function):
-
-   - `search_knowledge` — args: `query` (string), `context` (string)
-   - `search_codebase` — args: `query` (string)
-   - `search_docs` — args: `query` (string)
-   - `fix_bug` — args: `file_path`, `error_description`, `original_code`, `fixed_code`
-   - `run_tests` — args: `test_path` (optional string)
-   - `commit_and_push` — args: `branch_name`, `files` (array), `commit_message`
-   - `open_pull_request` — args: `title`, `body`, `branch`, `base`, `assignee`
-   - `get_open_prs` — args: `keyword` (optional)
-   - `get_pr_details` — args: `pr_number` (integer)
-   - `get_build_status` — args: `branch` (string)
-   - `get_recent_commits` — args: `branch`, `count`
-   - `recall_context` — args: `query` (string)
-
-5. Copy your **Assistant ID**
+- Setup Vapi assistant as given in the file  VAPI_ASSISTANT_CONFIG.md
+- Copy your **Assistant ID**
 
 ### Step 5 — Install and launch the VS Code extension
 
